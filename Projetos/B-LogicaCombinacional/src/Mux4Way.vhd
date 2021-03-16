@@ -13,6 +13,19 @@ end entity;
 
 architecture arch of Mux4Way is
 begin
-
+process (a,b,c,d,sel) is
+begin
+		
+	if (sel(0) ='0' and sel(1) = '0') then
+		q <= a;
+	elsif (sel(0) ='1' and sel(1) = '0') then
+		q <= b;
+	elsif (sel(0) ='0' and sel(1) = '1') then
+		q <= c;
+	else
+		q <= d;
+	end if;
+  
+end process;
 
 end architecture;
