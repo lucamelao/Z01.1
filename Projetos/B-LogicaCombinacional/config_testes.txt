@@ -25,6 +25,6 @@ Mux4Way16.vhd
 Mux8Way16.vhd
 # BarrelShifter16.vhd
 # circuito.vhd
-# detectorDeMoedas.vhd
+detectorDeMoedas.vhd
 #impressora.vhd
 #sevenSeg.vhd
