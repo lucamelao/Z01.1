@@ -12,5 +12,6 @@ end entity;
 architecture arch of Mux2Way is
 begin
 
+	q<=((not sel) and a) or (sel and b);
 
 end architecture;
