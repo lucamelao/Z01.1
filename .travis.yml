@@ -49,5 +49,6 @@ script:
   - bash updateZ01tools.sh 
 
   ## run scripts
-  - python3 Projetos/A-AmbienteDesenvolvimento/testeAmbienteDesenvolvimento.py
-  - python3 Projetos/B-LogicaCombinacional/testeLogicaCombinacional.py 
+  # - python3 Projetos/A-AmbienteDesenvolvimento/testeAmbienteDesenvolvimento.py
+  # - python3 Projetos/B-LogicaCombinacional/testeLogicaCombinacional.py 
+  - python3 Projetos/C-UnidadeLogicaAritmetica/testeULA.py
