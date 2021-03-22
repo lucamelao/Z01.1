@@ -1,4 +1,4 @@
-source "/home/borg/Desktop/Z01.1-Aries/Projetos/C-UnidadeLogicaAritmetica/vunit_out/test_output/lib.tb_fulladder.all_06db0ee602f16124af31f0ebe6776ffb6cee0ad1/modelsim/common.do"
+source "/home/borg/Documents/Z01.1-Aries/Projetos/C-UnidadeLogicaAritmetica/vunit_out/test_output/lib.tb_fulladder.all_06db0ee602f16124af31f0ebe6776ffb6cee0ad1/modelsim/common.do"
 proc vunit_user_init {} {
     return 0
 }
