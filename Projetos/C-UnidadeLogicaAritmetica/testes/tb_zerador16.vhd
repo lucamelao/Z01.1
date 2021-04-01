@@ -37,17 +37,31 @@ begin
 
   main : process
   begin
+    
     test_runner_setup(runner, runner_cfg);
-    wait until clk'event and clk='1';
-    a <= x"FFFF";
-    z <= '1';
-    wait until clk'event and clk='1';
-    assert(y = x"0000") report "a=0000, z=1";
-    wait until clk'event and clk='1';
-    a <= x"A5A5";
-    z <= '0';
-    wait until clk'event and clk='1';
-    assert(y = x"A5A5") report "a=A5A5, z=0, y=A5A5";
-    test_runner_cleanup(runner); -- Simulacao acaba aqui
+    -- Teste: 1
+    a <= "0001011111111111"; z<= '1';
+    wait for 200 ps;
+    assert(y="0000000000000000")  report "Falha em teste: 1" severity error;
+
+    -- Teste: 2
+    a <= "0001011111111111"; z<= '0';
+    wait for 200 ps;
+    assert(y="0001011111111111")  report "Falha em teste: 2" severity error;
+
+    -- wait until clk'event and clk='1';
+    -- a <= x"FFFF";
+    -- z <= '1';
+    -- wait until clk'event and clk='1';
+    -- assert(y = x"0000") report "a=0000, z=1";
+    -- wait until clk'event and clk='1';
+    -- a <= x"A5A5";
+    -- z <= '0';
+    -- wait until clk'event and clk='1';
+    -- assert(y = x"A5A5") report "a=A5A5, z=0, y=A5A5";
+    test_runner_cleanup(runner); 
+    
+    
+    -- Simulacao acaba aqui
   end process;
 end architecture;
