@@ -32,7 +32,7 @@ begin
   clock : process
   begin
     clk <= not clk;
-    wait for 10 ns;
+    wait for 200 ps;
   end process;
 
   main : process
@@ -49,7 +49,7 @@ begin
     a <= x"0000";
     z <= '1';
     wait until clk'event and clk='1';
-    assert(y = x"FFFF") report "a=0000, z=1, y=ffff";
+    assert(y = x"FFFF") report "a=0000 z=1, y=ffff";
 
     test_runner_cleanup(runner); -- Simulacao acaba aqui
   end process;
