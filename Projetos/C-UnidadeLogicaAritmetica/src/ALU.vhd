@@ -100,8 +100,8 @@ begin
 	inversorX:     inversor16 port map (nx,zxout,nxout);
 	zeradorY:      zerador16 port map (zy,y,zyout);
 	inversorY:     inversor16 port map (ny,zyout,nyout);
-	and:           And16 port map (nxout, nyout, andout);
-	add:           Add16 port map (nxout, nyout, adderout);
+	andFunc:       And16 port map (nxout, nyout, andout);
+	addFunc:       Add16 port map (nxout, nyout, adderout);
 	mux:           Mux16 port map (andout,adderout, f, muxout);
 	inversorFinal: inversor16 port map (no, muxout, precomp);
 	comparador:    Comparador16 port map (precomp,zr,ng);
