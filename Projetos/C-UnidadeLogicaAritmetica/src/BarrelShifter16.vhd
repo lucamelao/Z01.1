@@ -17,7 +17,7 @@ begin
 
 	mid <= a;
 
-	for I in size loop
+	for I in "000" to size loop
 		if (dir='0') then    -- left
 			mid(15) <= mid(14);
 			mid(14) <= mid(13);
