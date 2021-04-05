@@ -34,7 +34,7 @@ entity ALU is
 			zy:    in STD_LOGIC;                     -- zera a entrada y
 			ny:    in STD_LOGIC;                     -- inverte a entrada y
 			dir:   in STD_LOGIC;                     -- direcao de shift
-			size:  in STD_LOGIC_VECTOR(2 downto 0);  -- tamanho do shift
+			size:  in STD_LOGIC_VECTOR(1 downto 0);  -- tamanho do shift
 			f:     in STD_LOGIC_VECTOR(1 downto 0);  -- 0:and  1:add  2:xor  3:shiftX
 			no:    in STD_LOGIC;                     -- inverte o valor da saída
 			zr:    out STD_LOGIC;                    -- setado se saída igual a zero
@@ -90,7 +90,7 @@ architecture  rtl OF alu is
 		port ( 
 				a:    in  STD_LOGIC_VECTOR(15 downto 0);
 				dir:  in  std_logic;                    
-				size: in  std_logic_vector(2 downto 0); 
+				size: in  std_logic_vector(1 downto 0); 
 				q:    out STD_LOGIC_VECTOR(15 downto 0));
 	end component;
 
@@ -120,12 +120,14 @@ begin
 	inversorX:     inversor16 port map (nx,zxout,nxout);
 	zeradorY:      zerador16 port map (zy,y,zyout);
 	inversorY:     inversor16 port map (ny,zyout,nyout);
+
 	andFunc:       And16 port map (nxout, nyout, andout);
 	addFunc:       Add16 port map (nxout, nyout, adderout);
-	xorFunc:       Xor16 port map (nxout, nyout, xorout);
-	shiftFunc:     Xor16 port map (nxout, dir, size, shiftout);
-	mux:           Mux4Way16 port map (andout,adderout, xorout, shiftout, f, muxout);
-	inversorFinal: inversor16 port map (no, muxout, precomp);
+	xorout 		   <= nxout xor nyout;
+
+	mux:           Mux4Way16 port map (andout,adderout, xorout, "0000000000000000", f, muxout);
+	shiftFunc:     BarrelShifter16 port map (muxout, dir, size, shiftout);
+	inversorFinal: inversor16 port map (no, shiftout, precomp);
 	comparador:    Comparador16 port map (precomp,zr,ng);
 	saida <= precomp;
 

@@ -33,7 +33,7 @@ begin
   clock : process
   begin
     clk <= not clk;
-    wait for 10 ns;
+    wait for 100 ps;
   end process;
 
   main : process
