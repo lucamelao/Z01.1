@@ -37,6 +37,7 @@ entity ALU is
 			no:    in STD_LOGIC;                     -- inverte o valor da saída
 			zr:    out STD_LOGIC;                    -- setado se saída igual a zero
 			ng:    out STD_LOGIC;                    -- setado se saída é negativa
+			carry: out STD_LOGIC;
 			saida: out STD_LOGIC_VECTOR(15 downto 0) -- saída de dados da ALU
 	);
 end entity;
@@ -64,19 +65,12 @@ architecture  rtl OF alu is
 		port(
 			a   :  in STD_LOGIC_VECTOR(15 downto 0);
 			b   :  in STD_LOGIC_VECTOR(15 downto 0);
+			carry:out std_logic;
 			q   : out STD_LOGIC_VECTOR(15 downto 0)
 		);
 	end component;
 
 	component And16 is
-		port (
-			a:   in  STD_LOGIC_VECTOR(15 downto 0);
-			b:   in  STD_LOGIC_VECTOR(15 downto 0);
-			q:   out STD_LOGIC_VECTOR(15 downto 0)
-		);
-	end component;
-
-	component Xor16 is
 		port (
 			a:   in  STD_LOGIC_VECTOR(15 downto 0);
 			b:   in  STD_LOGIC_VECTOR(15 downto 0);
@@ -111,9 +105,9 @@ begin
 	zeradorY:      zerador16 port map (zy,y,zyout);
 	inversorY:     inversor16 port map (ny,zyout,nyout);
 	andFunc:       And16 port map (nxout, nyout, andout);
-	addFunc:       Add16 port map (nxout, nyout, adderout);
-	xorFunc:       Xor16 port map (nxout, nyout, xorout);
-	mux:           Mux4Way16 port map (andout,adderout, xorout, xorout, f, muxout);
+	addFunc:       Add16 port map (nxout, nyout, carry, adderout);
+	xorout <=      nxout xor nyout;
+	mux:           Mux4Way16 port map (andout,adderout, xorout, "0000000000000000", f, muxout);
 	inversorFinal: inversor16 port map (no, muxout, precomp);
 	comparador:    Comparador16 port map (precomp,zr,ng);
 	saida <= precomp;

@@ -26,13 +26,14 @@ component ALU is
 			no:    in STD_LOGIC;                     -- inverte o valor da saída
 			zr:    out STD_LOGIC;                    -- setado se saída igual a zero
 			ng:    out STD_LOGIC;                    -- setado se saída é negativa
+      carry: out std_logic;
 			saida: out STD_LOGIC_VECTOR(15 downto 0) -- saída de dados da ALU
 	);
 end component;
 
    signal  inX, inY : STD_LOGIC_VECTOR(15 downto 0);
    signal  inF : STD_LOGIC_VECTOR(1 downto 0);
-   signal  inZX, inNX, inZY, inNY, inNO, outZR, outNG : STD_LOGIC;
+   signal  inZX, inNX, inZY, inNY, inNO, outZR, outNG, outCarry : STD_LOGIC;
    signal  outSaida : STD_LOGIC_VECTOR(15 downto 0);
 
 begin
@@ -48,6 +49,7 @@ begin
     no => inNo,
     zr => outZr,
     ng => outNg,
+    carry => outCarry,
     saida => outsaida);
 
   main : process
