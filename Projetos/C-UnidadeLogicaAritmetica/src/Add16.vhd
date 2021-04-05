@@ -130,7 +130,7 @@ begin
     a=>a(15),
     b=>b(15),
     c=> vaium(14),
-    soma=> q(15)
+    soma=> q(15),
     vaium => carry);
   
 

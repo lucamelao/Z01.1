@@ -60,7 +60,7 @@ begin
       inX <= "0000000000000000"; inY <= "1111111111111111";
       inZX <= '1'; inNX <= '0'; inZY <= '1'; inNY <= '0'; inF <= "01"; inNO <= '0';
       wait for 50 ps;
-      assert(outZR = '1' and outNG = '0' and outSaida= "0000000000000000")  report "Falha em teste: 1" severity error;
+      assert(outZR = '1' and outNG = '0' and outSaida= "0000000000000000" and outCarry = '0')  report "Falha em teste: 1" severity error;
 
       -- Teste: 2
       inX <= "0000000000000000"; inY <= "1111111111111111";
@@ -164,19 +164,30 @@ begin
       wait for 50 ps;
       assert(outZR = '0' and outNG = '1' and outSaida= "1111111111111111")  report "Falha em teste: 18" severity error;
 
-      ---- Teste: 19 - Testa 5 * 2= 10
-      --inX <= "0000000000000101"; inY <= "1111111111111111";
-      --inZX <= '0'; inNX <= '0'; inZY <= '0'; inNY <= '0'; inF <= "10"; inNO <= '0';
-      --wait for 50 ps;
-      --assert(outZR = '0' and outNG = '0' and outSaida= "0000000000001010")  report "Falha em teste: 19" severity error;
---
-      ---- Teste: 20 - Testa 0 * 2 = 0
-      --inX <= "0000000000000000"; inY <= "1111111111111111";
-      --inZX <= '0'; inNX <= '0'; inZY <= '0'; inNY <= '0'; inF <= "10"; inNO <= '0';
-      --wait for 50 ps;
-      --assert(outZR = '1' and outNG = '0' and outSaida= "0000000000000000")  report "Falha em teste: 20" severity error;
+      -- Teste: 19
+      inX <= "0000000000000000"; inY <= "1111111111111111";
+      inZX <= '0'; inNX <= '0'; inZY <= '0'; inNY <= '0'; inF <= "10"; inNO <= '0';
+      wait for 50 ps;
+      assert(outZR = '0' and outNG = '1' and outSaida= "1111111111111111")  report "Falha em teste: 18" severity error;
 
-      
+       -- Teste: 20
+       inX <= "0000000000000011"; inY <= "1111111111111111";
+       inZX <= '0'; inNX <= '0'; inZY <= '0'; inNY <= '0'; inF <= "10"; inNO <= '0';
+       wait for 50 ps;
+       assert(outZR = '0' and outNG = '1' and outSaida= "1111111111111100")  report "Falha em teste: 19" severity error;
+
+       -- Teste: 20
+       inX <= "1111111111111111"; inY <= "0000000000000001";
+       inZX <= '0'; inNX <= '0'; inZY <= '0'; inNY <= '0'; inF <= "01"; inNO <= '0';
+       wait for 50 ps;
+       assert(outZR = '1' and outNG = '0' and outCarry = '1')  report "Falha em teste: 20" severity error;
+
+       -- Teste: 20
+       inX <= "1111111111111111"; inY <= "0000000000000010";
+       inZX <= '0'; inNX <= '0'; inZY <= '0'; inNY <= '0'; inF <= "01"; inNO <= '0';
+       wait for 50 ps;
+       assert(outZR = '0' and outNG = '0' and outCarry = '1' and outSaida= "0000000000000001")  report "Falha em teste: 20" severity error;
+
 
     test_runner_cleanup(runner); -- Simulacao acaba aqui
 
