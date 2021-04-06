@@ -8,4 +8,5 @@ Inc16.vhd
 comparador16.vhd
 inversor16.vhd
 zerador16.vhd
+BarrelShifter16.vhd
 ALU.vhd
