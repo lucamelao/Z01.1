@@ -26,7 +26,7 @@ end entity;
 
 architecture arch of PC is
 
- signal muxOut : std_logic_vector(15 downto 0);
+  signal inc, regOut, regIn : std_logic_vector(15 downto 0);
 
   component Inc16 is
       port(
@@ -42,9 +42,16 @@ architecture arch of PC is
           load:    in STD_LOGIC;
           output: out STD_LOGIC_VECTOR(15 downto 0)
         );
-    end component;
+  end component;
 
 begin
 
+    Reg : Register16 port map(clock, regIn, '1', regOut);
+    output <= regOut;
+    IncF: Inc16 port map(regOut, inc);
+    regIn <= input when load = '1' else
+             "0000000000000000" when reset = '1' else
+             inc when increment = '1' else
+             regOut;
 
 end architecture;
