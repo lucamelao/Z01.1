@@ -1,8 +1,0 @@
-# Reading pref.tcl
-# source "/home/borg/Desktop/Z01.1-Aries/Projetos/D-LogicaSequencial/vunit_out/test_output/lib.tb_ram64.all_e199d4178e678940de57b7000af11ce0191951a2/modelsim/gui.do"
-# vsim -modelsimini /home/borg/Desktop/Z01.1-Aries/Projetos/D-LogicaSequencial/vunit_out/modelsim/modelsim.ini -wlf /home/borg/Desktop/Z01.1-Aries/Projetos/D-LogicaSequencial/vunit_out/test_output/lib.tb_ram64.all_e199d4178e678940de57b7000af11ce0191951a2/modelsim/vsim.wlf -quiet -t ps -onfinish stop lib.tb_ram64(tb) -L vunit_lib -L lib -g/tb_ram64/runner_cfg="active python runner : true,enabled_test_cases : ,output path : /home/borg/Desktop/Z01.1-Aries/Projetos/D-LogicaSequencial/vunit_out/test_output/lib.tb_ram64.all_e199d4178e678940de57b7000af11ce0191951a2/,tb path : /home/borg/Desktop/Z01.1-Aries/Projetos/D-LogicaSequencial/testes/,use_color : false" 
-# Start time: 18:28:42 on Apr 20,2021
-# ** Warning: Design size of 83056 statements exceeds ModelSim-Intel FPGA Starter Edition recommended capacity.
-# Expect performance to be adversely affected.
-# End time: 18:28:48 on Apr 20,2021, Elapsed time: 0:00:06
-# Errors: 0, Warnings: 1
