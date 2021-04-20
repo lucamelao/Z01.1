@@ -60,14 +60,14 @@ architecture arch of Ram64 is
 
 begin
 
-	r0: ram8 port map(clock   => clock, input => input,load => load0,address => address(2 downto 0), output => output0);
-	r1: ram8 port map(clock   => clock, input => input,load => load1,address => address(2 downto 0), output => output1);
-	r2: ram8 port map(clock   => clock, input => input,load => load2,address => address(2 downto 0), output => output2);
-	r3: ram8 port map(clock   => clock, input => input,load => load3,address => address(2 downto 0), output => output3);
-	r4: ram8 port map(clock   => clock, input => input,load => load4,address => address(2 downto 0), output => output4);
-	r5: ram8 port map(clock   => clock, input => input,load => load5,address => address(2 downto 0), output => output5);
-	r6: ram8 port map(clock   => clock, input => input,load => load6,address => address(2 downto 0), output => output6);
-	r7: ram8 port map(clock   => clock, input => input,load => load7,address => address(2 downto 0), output => output7);
+	r0: ram8 port map(clock,input,load0,address(2 downto 0),output0);
+	r1: ram8 port map(clock,input,load1,address(2 downto 0),output1);
+	r2: ram8 port map(clock,input,load2,address(2 downto 0),output2);
+	r3: ram8 port map(clock,input,load3,address(2 downto 0),output3);
+	r4: ram8 port map(clock,input,load4,address(2 downto 0),output4);
+	r5: ram8 port map(clock,input,load5,address(2 downto 0),output5);
+	r6: ram8 port map(clock,input,load6,address(2 downto 0),output6);
+	r7: ram8 port map(clock,input,load7,address(2 downto 0),output7);
 
 	m1: mux8way16 port map(
 		a => output0,
