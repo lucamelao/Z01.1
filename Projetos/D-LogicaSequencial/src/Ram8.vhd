@@ -59,14 +59,14 @@ architecture arch of Ram8 is
 
 begin
 
-	r0 :  Register16 port map(clock => clock, input => input, load => load0, output => output0);
-	r1 :  Register16 port map(clock => clock, input => input, load => load1, output => output1);
-	r2 :  Register16 port map(clock => clock, input => input, load => load2, output => output2);
-	r3 :  Register16 port map(clock => clock, input => input, load => load3, output => output3);
-	r4 :  Register16 port map(clock => clock, input => input, load => load4, output => output4);
-	r5 :  Register16 port map(clock => clock, input => input, load => load5, output => output5);
-	r6 :  Register16 port map(clock => clock, input => input, load => load6, output => output6);
-	r7 :  Register16 port map(clock => clock, input => input, load => load7, output => output7);
+	r0 :  Register16 port map(clock,input,load0,output0);
+	r1 :  Register16 port map(clock,input,load1,output1);
+	r2 :  Register16 port map(clock,input,load2,output2);
+	r3 :  Register16 port map(clock,input,load3,output3);
+	r4 :  Register16 port map(clock,input,load4,output4);
+	r5 :  Register16 port map(clock,input,load5,output5);
+	r6 :  Register16 port map(clock,input,load6,output6);
+	r7 :  Register16 port map(clock,input,load7,output7);
 
 	mux : Mux8Way16 port map (
 		a => output0,
