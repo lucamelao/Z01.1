@@ -24,20 +24,20 @@ begin
 			if (K = '0') then
 				q <= '1';
 				notq <= '0';
-			elsif (K = '1') then
+			else
 				q <= notq;
 				notq <= q;
 			end if;
-		elsif (J = '0') then
+		else
 			if (K = '1') then
 				q <= '0';
 				notq <= '1';
-			elsif (K = '0') then
+			else
 				q <= q;
 				notq <= notq;
 			end if;
 		end if;
-	elsif (not rising_edge(CLOCK)) then
+	else
 		q <= q;
 		notq <= notq;
 	end if;
