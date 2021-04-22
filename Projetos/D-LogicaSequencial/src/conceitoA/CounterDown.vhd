@@ -25,7 +25,6 @@ architecture arch of CounterDown is
 
 begin
 
-
 u0: FlipFlopT port map(clock, '1', q0, not0);
 u1: FlipFlopT port map(q0, '1', q1, not1);
 u2: FlipFlopT port map(q1, '1', q2, not2);

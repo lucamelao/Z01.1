@@ -33,10 +33,6 @@ begin
   begin
     test_runner_setup(runner, runner_cfg);
 
-		-- Teste: 0
-    wait until clk'event and clk='0';
-		assert(q = "000")  report "Falha em teste: 0" severity error;
-
 		-- Teste: 1
     wait until clk'event and clk='0';
 		assert(q = "111")  report "Falha em teste: 1" severity error;
