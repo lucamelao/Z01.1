@@ -60,6 +60,7 @@ architecture arch of Ram64 is
 
 begin
 
+
 	r0: ram8 port map(clock,input,load0,address(2 downto 0),output0);
 	r1: ram8 port map(clock,input,load1,address(2 downto 0),output1);
 	r2: ram8 port map(clock,input,load2,address(2 downto 0),output2);
@@ -68,6 +69,7 @@ begin
 	r5: ram8 port map(clock,input,load5,address(2 downto 0),output5);
 	r6: ram8 port map(clock,input,load6,address(2 downto 0),output6);
 	r7: ram8 port map(clock,input,load7,address(2 downto 0),output7);
+
 
 	m1: mux8way16 port map(
 		a => output0,

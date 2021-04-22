@@ -68,6 +68,7 @@ begin
 	r5 : ram64 port map(clock,input,load5,address(5 downto 0),output5);
 	r6 : ram64 port map(clock,input,load6,address(5 downto 0),output6);
 	r7 : ram64 port map(clock,input,load7,address(5 downto 0),output7);
+
 	
 	d1 : dmux8way port map(
 		a => load,
