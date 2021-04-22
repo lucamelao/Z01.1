@@ -16,33 +16,31 @@ end entity;
 
 architecture arch of FlipFlopJK is
 
+signal entrada: std_logic:= '0';	
+
 begin
 
 	process(clock) begin
 	if (rising_edge(CLOCK)) then
 		if (J = '1') then
 			if (K = '0') then
-				q <= '1';
-				notq <= '0';
+				entrada <= '1';
 			else
-				q <= notq;
-				notq <= q;
+				entrada <= not entrada;
 			end if;
 		else
 			if (K = '1') then
-				q <= '0';
-				notq <= '1';
+				entrada <= '0';
 			else
-				q <= q;
-				notq <= notq;
+				entrada <= entrada;
 			end if;
 		end if;
 	else
-		q <= q;
-		notq <= notq;
+		entrada <= entrada;
 	end if;
 	end process;
-
+	q <= entrada;
+	notq <= not entrada;
 
 
 end architecture;
