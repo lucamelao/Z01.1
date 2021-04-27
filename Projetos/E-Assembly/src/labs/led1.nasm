@@ -6,6 +6,10 @@
 ; Faça o primeiro LED acender
 ; OFF OFF OFF OFF OFF OFF OFF OFF ON
 
-leaw $21184, %A
-movw $1, (%A)
 
+
+
+leaw $1, %A
+movw %A, %D
+leaw $21184, %A
+movw %D, (%A)
