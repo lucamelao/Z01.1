@@ -24,10 +24,8 @@ movw (%A), %D
 leaw $3, %A
 addw %D, (%A), %D
 movw %D, (%A)
-leaw $1, %A
-movw %A, %D
 leaw $2, %A
-subw (%A), %D, %D
+subw (%A), $1, %D
 movw %D, (%A)
 END:
 jmp
