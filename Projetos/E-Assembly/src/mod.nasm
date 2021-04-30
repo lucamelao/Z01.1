@@ -10,3 +10,13 @@
 ; 4  % 3 = 1
 ; 10 % 7 = 3
 ; ------------------------------------------------------------
+leaw $0, %A
+movw (%A), %D;d=ram[0]
+LOOP:
+leaw $2, %A
+movw %D, (%A);ram[2]=ram[0]
+leaw $1, %A 
+subw %D, (%A), %D;d=ram[0]-ram[1]
+leaw $LOOP, %A 
+jge
+nop 
