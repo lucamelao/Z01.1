@@ -7,44 +7,51 @@
 
 leaw $0, %A
 movw (%A), %D
+leaw $ZERO, %A
+je %D
+nop
 subw %D, $1, %D
 leaw $2, %A
 movw %D, (%A)
 leaw $3, %A
 movw %D, (%A)
-LOOP:
-leaw $2, %A
-movw (%A), %D
-leaw $ELSE1, %A
-jne %D
-nop
-leaw $3, %A
-movw (%A), %D
-leaw $ELSE0, %A
-jne %D
-nop
-leaw $END0, %A
-jmp
-nop
-ELSE0:
-leaw $3, %A
-subw (%A), $1, %D
-movw %D, (%A)
-leaw $2, %A
-movw %D, (%A)
-END0:
-leaw $END1, %A
-jmp
-nop
-ELSE1:
+LOOPout:
+LOOPin:
 leaw $0, %A
 movw (%A), %D
 leaw $1, %A
-addw %D, (%A), %D
+addw (%A), %D, %D
 movw %D, (%A)
 leaw $2, %A
 subw (%A), $1, %D
 movw %D, (%A)
-END1:
+leaw $LOOPin, %A
+jg %D
+nop
+leaw $1, %A
+movw (%A), %D
+leaw $0, %A
+movw %D, (%A)
+leaw $1, %A
+movw $0, %D
+movw %D, (%A)
+leaw $3, %A
+subw (%A), $1, %D
+movw %D, (%A)
+leaw $2, %A
+movw %D, (%A)
+leaw $LOOPout, %A
+jg %D
+nop
+leaw $END, %A
 jmp
 nop
+ZERO:
+leaw $0, %A
+movw $1, %D
+movw %D, (%A)
+END:
+leaw $0, %A
+movw (%A), %D
+leaw $1, %A
+movw %D, (%A)

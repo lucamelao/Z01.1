@@ -11,23 +11,14 @@ movw (%A), %D
 leaw $2, %A
 movw %D, (%A)
 LOOP:
-leaw $2, %A
-movw (%A), %D
-leaw $ELSE, %A
-jne %D
-nop
-leaw $END, %A
-jmp
-nop
-ELSE:
 leaw $1, %A
 movw (%A), %D
 leaw $0, %A
-addw %D, (%A), %D
+addw (%A), %D, %D
 movw %D, (%A)
 leaw $2, %A
 subw (%A), $1, %D
 movw %D, (%A)
-END:
-jmp
+leaw $LOOP, %A
+jg %D
 nop
