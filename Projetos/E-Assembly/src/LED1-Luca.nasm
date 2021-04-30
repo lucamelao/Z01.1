@@ -1,25 +1,25 @@
-leaw $0, %A
+leaw $21185, %A
 movw (%A), %D
-leaw $1, %A
-subw %D, (%A), %D
-leaw $ELSE, %A
-jl %D
-nop
-leaw $0, %A
-movw (%A), %D
-
-
-
-leaw $END, %A
-jmp
-nop
-ELSE:
-
-leaw $1, %A
-movw (%A), %D
-END:
-leaw $2, %A
+notw %D
+leaw $14, %A
+addw %D, %A, %D
+leaw $496, %A
+addw %A, %D, %D
+leaw $21184, %A
 movw %D, (%A)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
