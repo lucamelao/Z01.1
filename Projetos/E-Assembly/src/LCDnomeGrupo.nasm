@@ -85,7 +85,7 @@ nop
 
 ; PROX LETRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
-leaw $16386, %A
+leaw $16387, %A
 movw $-1, (%A)
 movw %A, %D
 leaw $2, %A
@@ -106,7 +106,7 @@ leaw $1, %A
 addw %D, (%A), %D
 leaw $2, %A
 movw %D, (%A)
-leaw $32769, %A
+leaw $32768, %A
 movw %A, %D
 leaw $2, %A
 movw (%A), %A
@@ -143,6 +143,7 @@ leaw $2, %A
 movw %D, (%A)
 
 
+
 LOOP4:
 leaw $2, %A
 movw (%A), %D
@@ -164,9 +165,18 @@ leaw $LOOP4, %A
 jg %D
 nop
 
+leaw $2, %A
+movw (%A), %D
+leaw $1, %A
+addw %D, (%A), %D
+movw %D, %A
+movw $-1, (%A)
+
+
+
 ; PROX LETRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
-leaw $16388, %A
+leaw $16386, %A
 movw $1, (%A)
 movw %A, %D
 leaw $2, %A
@@ -187,7 +197,7 @@ leaw $1, %A
 addw %D, (%A), %D
 leaw $2, %A
 movw %D, (%A)
-leaw $1, %A
+leaw $32768, %A
 movw %A, %D
 leaw $2, %A
 movw (%A), %A
