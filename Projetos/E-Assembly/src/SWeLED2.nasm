@@ -42,7 +42,8 @@ addw %D, %A, %D
 leaw $3, %A
 movw %D, (%A)
 
-leaw $52, %D
+leaw $52, %A
+movw %A, %D
 leaw $0, %A
 addw (%A), %D, %D
 leaw $1, %A
