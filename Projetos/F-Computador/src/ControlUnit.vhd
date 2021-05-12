@@ -35,5 +35,10 @@ begin
   loadA <= (instruction(17) and instruction(3)) or not instruction(17);
   muxALUI_A <= not instruction(17);
   zx <= instruction(17) and instruction(12);
-
+  muxAM <= instruction(17) and instruction(13);
+  nx <= instruction(17) and instruction(11);
+  ny <= instruction(17) and instruction(9);
+  zy <= instruction(17) and instruction(10);
+  f <= instruction(17) and instruction(8);
+  no <= instruction(17) and instruction(7);
 end architecture;
