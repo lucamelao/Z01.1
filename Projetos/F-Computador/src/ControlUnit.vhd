@@ -41,4 +41,13 @@ begin
   zy <= instruction(17) and instruction(10);
   f <= instruction(17) and instruction(8);
   no <= instruction(17) and instruction(7);
+
+  loadPc  <=  '1' when (instruction(17)='1' and instruction(2 downto 0)="001" and (zr='0' and ng='0')) else
+		    '1' when (instruction(17)='1' and instruction(2 downto 0)="010" and (ng='0' and zr='1')) else
+		    '1' when (instruction(17)='1' and instruction(2 downto 0)="011" and (ng='0')) else
+		    '1' when (instruction(17)='1' and instruction(2 downto 0)="100" and (zr='0' and ng='1')) else
+		    '1' when (instruction(17)='1' and instruction(2 downto 0)="101" and (zr='0')) else
+		    '1' when (instruction(17)='1' and instruction(2 downto 0)="110" and (ng='1')) else
+		    '1' when (instruction(17)='1' and instruction(2 downto 0)="111") else 
+		    '0';
 end architecture;
