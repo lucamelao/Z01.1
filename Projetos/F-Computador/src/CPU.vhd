@@ -67,12 +67,13 @@ architecture arch of CPU is
 
   component ControlUnit is
     port(
-      instruction                 : in STD_LOGIC_VECTOR(17 downto 0);
-      zr,ng                       : in STD_LOGIC;
-      muxALUI_A                   : out STD_LOGIC;
-      muxAM                       : out STD_LOGIC;
-      zx, nx, zy, ny, f, no       : out STD_LOGIC;
-      loadA, loadD, loadM, loadPC : out STD_LOGIC
+      instruction                        : in STD_LOGIC_VECTOR(17 downto 0);
+      zr,ng                              : in STD_LOGIC;
+      muxALUI_A                          : out STD_LOGIC;
+      muxALUI_D                          : out STD_LOGIC;
+      muxAM                              : out STD_LOGIC;
+      zx, nx, zy, ny, f, no              : out STD_LOGIC;
+      loadA, loadD, loadS, loadM, loadPC : out STD_LOGIC
       );
   end component;
 
