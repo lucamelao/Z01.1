@@ -88,6 +88,7 @@ architecture arch of CPU is
   signal c_no: STD_LOGIC;
   signal c_loadA: STD_LOGIC;
   signal c_loadD: STD_LOGIC;
+  signal c_loadS: STD_LOGIC;
   signal c_loadPC: STD_LOGIC;
   signal c_zr: std_logic := '0';
   signal c_ng: std_logic := '0';
@@ -112,6 +113,7 @@ begin
 
   regA: Register16 port map(clock, s_muxALUI_Aout,c_loadA, s_regAout );
   regD: Register16 port map(clock, s_ALUout,c_loadD, s_regDout);
+  regS: Register16 port map(clock, s_ALUout,c_loadS, s_regSout);
 
   ULA: ALU port map(s_regDout,s_muxAM_out, c_zx, c_nx,c_zy,c_ny,c_f,c_no,c_zr,c_ng, s_ALUout);
 
