@@ -20,8 +20,9 @@ entity ControlUnit is
 		muxAM                       : out STD_LOGIC;                     -- mux que seleciona entre
                                                                      -- reg. A e Mem. RAM para ALU
                                                                      -- A  e Mem. RAM para ALU
-		zx, nx, zy, ny, f, no       : out STD_LOGIC;                     -- sinais de controle da ALU
-		loadA, loadD, loadM, loadPC : out STD_LOGIC               -- sinais de load do reg. A,
+		muxSD                       : out STD_LOGIC;
+    zx, nx, zy, ny, f, no       : out STD_LOGIC;                     -- sinais de controle da ALU
+		loadA, loadD, loadS, loadM, loadPC : out STD_LOGIC               -- sinais de load do reg. A,
                                                                      -- reg. D, Mem. RAM e Program Counter
     );
 end entity;
@@ -32,8 +33,10 @@ begin
 
   loadD <= instruction(17) and instruction(4);
   loadM <= instruction(17) and instruction(5);
+  loadS <= instruction(17) and instruction(6);
   loadA <= (instruction(17) and instruction(3)) or not instruction(17);
   muxALUI_A <= not instruction(17);
+  muxSD <= instruction(17) and instruction(14);
   zx <= instruction(17) and instruction(12);
   muxAM <= instruction(17) and instruction(13);
   nx <= instruction(17) and instruction(11);
