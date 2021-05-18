@@ -203,11 +203,10 @@ begin
       report " **Falha** em jge %D falso" severity error;
 
       -- Registrador S: 1
-      instruction <= "10" & "010" & "001100" & "1000" & "000";
+      instruction <= "10" & "010" & "101010" & "1000" & "000";
       zr <= '0';  ng <= '0';
       wait until clk = '1';
-      assert(loadA  = '0' and loadD  = '0' and loadS = '1' and loadM  = '0' and loadPC = '0' and
-             zx = '0' and nx = '0' and zy = '1' and ny = '1' and f = '0' and no = '0')
+      assert(loadS = '1')
         report " **Falha** em %S" severity error;
 
     test_runner_cleanup(runner); -- Simulation ends here
