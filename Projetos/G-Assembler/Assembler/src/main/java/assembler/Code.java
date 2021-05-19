@@ -17,7 +17,58 @@ public class Code {
      */
     public static String dest(String[] mnemnonic) {
         /* TODO: implementar */
-    	return "";
+
+        if (mnemnonic.length < 2){
+            return "0000";
+        }
+
+        if (mnemnonic.length > 3) {
+            switch (mnemnonic[mnemnonic.length - 1]) {
+                case "%A":
+                    switch (mnemnonic[mnemnonic.length - 2]) {
+                        case "(%A)":
+                            if (mnemnonic[0].equals("movw")){
+                                return "0101";
+                            }
+                            return "0001";
+                        case "%D":
+                            return "0011";
+                        case "%A":
+                            return "0001";
+                        default:
+                            return "0000";
+                    }
+
+                case "%D":
+                    switch (mnemnonic[mnemnonic.length - 2]) {
+                        case "(%A)":
+                            return "0110";
+                        case "%A":
+                            return "0011";
+                        case "%D":
+                            return "0010";
+                        default:
+                            return "0000";
+                    }
+                case "(%A)":
+                    switch (mnemnonic[mnemnonic.length - 2]) {
+                        case "%A":
+                            return "0101";
+                        case "%D":
+                            return "0110";
+                        default:
+                            return "0000";
+                    }
+            }
+        } else {
+            switch (mnemnonic[mnemnonic.length - 1]) {
+                case "%A"   : return "0001";
+                case "%D"   : return "0010";
+                case "(%A)"   : return "0100";
+                default: return "0000";
+            }
+        }
+        return "0000";
     }
 
     /**
@@ -27,7 +78,9 @@ public class Code {
      */
     public static String comp(String[] mnemnonic) {
         /* TODO: implementar */
-    	return "";
+
+        return "";
+
     }
 
     /**
@@ -37,7 +90,23 @@ public class Code {
      */
     public static String jump(String[] mnemnonic) {
         /* TODO: implementar */
-    	return "";
+        switch (mnemnonic[0]){
+            case "jmp"  : return "111";
+
+            case "jle"  : return "110";
+
+            case "jne"  : return "101";
+
+            case "jl"   : return "100";
+
+            case "jge"   : return "011";
+
+            case "je"   : return "010";
+
+            case "jg"   : return "001";
+
+            default    : return "000";
+        }
     }
 
     /**
