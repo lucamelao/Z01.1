@@ -20,6 +20,7 @@ architecture tb of tb_ControlUnit is
         instruction                        : in STD_LOGIC_VECTOR(17 downto 0);  -- instrução para executar
         zr,ng                              : in STD_LOGIC;                      -- valores zr(se zero) e ng(se negativo) da ALU
         muxALUI_A                          : out STD_LOGIC;                     -- mux que seleciona entre instrução e ALU para reg. A
+        muxALUI_D                          : out STD_LOGIC;
         muxAM                              : out STD_LOGIC;                     -- mux que seleciona entre reg. A e Mem. RAM para ALU
         muxSD                              : out STD_LOGIC;
         zx, nx, zy, ny, f, no              : out STD_LOGIC;                     -- sinais de controle da ALU
@@ -30,14 +31,14 @@ architecture tb of tb_ControlUnit is
 	signal clk : std_logic := '0';
   signal instruction                 : STD_LOGIC_VECTOR(17 downto 0) := (others => '0');
   signal zr,ng                       : STD_LOGIC := '0';
-  signal muxAM, muxSD                   : STD_LOGIC := '0';
-  signal muxALUI_A                   : STD_LOGIC := '0';
+  signal muxAM, muxSD                : STD_LOGIC := '0';
+  signal muxALUI_A, muxALUI_D        : STD_LOGIC := '0';
   signal zx, nx, zy, ny, f, no       : STD_LOGIC := '0';
   signal loadA, loadD, loadS, loadM, loadPC : STD_LOGIC := '0';
 
 begin
 
-	uCU: ControlUnit port map(instruction, zr, ng, muxALUI_A, muxAM, muxSD, zx, nx, zy, ny, f, no, loadA, loadD, loadS, loadM, loadPC);
+	uCU: ControlUnit port map(instruction, zr, ng, muxALUI_A, muxALUI_D, muxAM, muxSD, zx, nx, zy, ny, f, no, loadA, loadD, loadS, loadM, loadPC);
 
 	clk <= not clk after 100 ps;
 
@@ -81,28 +82,50 @@ begin
     wait until clk = '1';
     assert(loadA = '1' and loadM = '0' and loadD = '0')
       report "TESTE 6: loadA" severity error;
+    
+    -- Teste: loadS
+    instruction <= "00" & "0111111111111111";
+    wait until clk = '1';
+    assert(loadS = '0')
+      report "TESTE 7: LOAD S FALSO" severity error;
+
+    instruction <= "10" & "0100000001000000";
+    wait until clk = '1';
+    assert(loadS = '1')
+      report "TESTE 8: LOAD S" severity error;
 
     -- Teste: muxALUI_A
     instruction <= "10" & "0000000000100000";
     wait until clk = '1';
     assert(muxALUI_A = '0')
-      report "TESTE 7: muxALUIA" severity error;
+      report "TESTE 9: muxALUIA" severity error;
 
     instruction <= "00" & "0111111111111111";
     wait until clk = '1';
     assert(muxALUI_A = '1')
-      report "TESTE 8: muxALUIA falso" severity error;
+      report "TESTE 10: muxALUIA falso" severity error;
+
+    -- Teste: muxALUI_D
+    instruction <= "11" & "0000000000100000";
+    wait until clk = '1';
+    assert(muxALUI_D = '0')
+      report "TESTE 11: muxALUID" severity error;
+
+    instruction <= "01" & "0111111111111111";
+    wait until clk = '1';
+    assert(muxALUI_D = '1')
+      report "TESTE 12: muxALUID falso" severity error;
 
     -- Teste: zx
     instruction <= "10" & "0001000000000000";
     wait until clk = '1';
     assert(zx = '1')
-      report "TESTE 9: zx" severity error;
+      report "TESTE 13: zx" severity error;
 
     instruction <= "00" & "0001000000000000";
     wait until clk = '1';
     assert(zx = '0')
-      report "TESTE 10: zx" severity error;
+      report "TESTE 14: zx" severity error;
 
 
    -----------------------------------------------
@@ -112,13 +135,25 @@ begin
 		-- Teste: A instruction
     instruction <= "00" & "0111111111111111";
     wait until clk = '1';
-		assert(loadA = '1' and loadD = '0' and loadM = '0' and loadPC = '0' and muxALUI_A = '1')
+		assert(loadA = '1' and loadD = '0' and loadM = '0' and loadPC = '0' and muxALUI_A = '1' and muxALUI_D = '0')
       report "Falha em leaw 0xFFFF, %A" severity error;
 
 		-- leaw %5, %A
     instruction <= "00" & "0000000000000101";
     wait until clk = '1';
-		assert(loadA = '1' and loadD = '0' and loadM = '0' and loadPC = '0' and muxALUI_A = '1')
+		assert(loadA = '1' and loadD = '0' and loadM = '0' and loadPC = '0' and muxALUI_A = '1' and muxALUI_D = '0')
+      report "Falha em leaw 5, %A" severity error;
+
+    -- Teste: D instruction
+    instruction <= "01" & "0111111111111111";
+    wait until clk = '1';
+    assert(loadA = '0' and loadD = '1' and loadM = '0' and loadPC = '0' and muxALUI_A = '0' and muxALUI_D = '1')
+      report "Falha em leaw 0xFFFF, %A" severity error;
+
+    -- leaw %5, %D
+    instruction <= "01" & "0000000000000101";
+    wait until clk = '1';
+    assert(loadA = '0' and loadD = '1' and loadM = '0' and loadPC = '0' and muxALUI_A = '0' and muxALUI_D = '1')
       report "Falha em leaw 5, %A" severity error;
 
     -----------------------------------------------
@@ -201,13 +236,6 @@ begin
     assert(loadA  = '0' and loadD  = '0' and  loadM  = '0' and  loadPC = '0' and
            zx = '0' and nx = '0' and zy = '1' and ny = '1' and f = '0' and no = '0')
       report " **Falha** em jge %D falso" severity error;
-
-      -- Registrador S: 1
-      instruction <= "10" & "010" & "101010" & "1000" & "000";
-      zr <= '0';  ng <= '0';
-      wait until clk = '1';
-      assert(loadS = '1')
-        report " **Falha** em %S" severity error;
 
     test_runner_cleanup(runner); -- Simulation ends here
 
