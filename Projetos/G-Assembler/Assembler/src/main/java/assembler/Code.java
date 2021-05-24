@@ -81,246 +81,246 @@ public class Code {
         switch(mnemnonic[0]){
             case "movw":
                 switch(mnemnonic[1]){
-                    case "%D"   : return "0001100";
-                    case "%A"   : return "0110000";
-                    case "(%A)" : return "1110000";
-                    default     : return "0000000";
+                    case "%D"   : return "000001100";
+                    case "%A"   : return "000110000";
+                    case "(%A)" : return "001110000";
+                    default     : return "000000000";
                 }
             case "notw":
                 switch(mnemnonic[1]){
-                    case "%D"   : return "0001101";
-                    case "%A"   : return "0110001";
-                    case "(%A)" : return "1110001";
-                    default     : return "0000000";
+                    case "%D"   : return "000001101";
+                    case "%A"   : return "000110001";
+                    case "(%A)" : return "001110001";
+                    default     : return "000000000";
                 }
             case "negw":
                 switch(mnemnonic[1]){
-                    case "%D"   : return "0001111";
-                    case "%A"   : return "0110011";
-                    case "(%A)" : return "1110011";
-                    default     : return "0000000";
+                    case "%D"   : return "000001111";
+                    case "%A"   : return "000110011";
+                    case "(%A)" : return "001110011";
+                    default     : return "000000000";
                 }
             case "incw":
                 switch(mnemnonic[1]){
-                    case "%D"   : return "0011111";
-                    case "%A"   : return "0110111";
-                    case "(%A)" : return "1110111";
-                    default     : return "0000000";
+                    case "%D"   : return "000011111";
+                    case "%A"   : return "000110111";
+                    case "(%A)" : return "001110111";
+                    default     : return "000000000";
                 }
             case "decw":
                 switch(mnemnonic[1]){
-                    case "%D"   : return "0001110";
-                    case "%A"   : return "0110010";
-                    case "(%A)" : return "1110010";
-                    default     : return "0000000";
+                    case "%D"   : return "000001110";
+                    case "%A"   : return "000110010";
+                    case "(%A)" : return "001110010";
+                    default     : return "000000000";
                 }
             case "orw":
                 switch(mnemnonic[1]){
                     case "%D":
                         switch(mnemnonic[2]){
-                            case "%A"    : return "0010101";
-                            case "(%A)"  : return "1010101";
-                            default      : return "0000000";
+                            case "%A"    : return "000010101";
+                            case "(%A)"  : return "001010101";
+                            default      : return "000000000";
                         }
                     case "%A":
                         switch(mnemnonic[2]){
-                            case "%D"    : return "0010101";
-                            default      : return "0000000";
+                            case "%D"    : return "000010101";
+                            default      : return "000000000";
                         }
                     case "(%A)":
                         switch(mnemnonic[2]){
-                            case "%D"    : return "1010101";
-                            default      : return "0000000";
+                            case "%D"    : return "001010101";
+                            default      : return "000000000";
                         }
-                    default: return "0000000";
+                    default: return "000000000";
                 }
             case "andw":
                 switch(mnemnonic[1]){
                     case "%D":
                         switch(mnemnonic[2]){
-                            case "%A"    : return "0000000";
-                            case "(%A)"  : return "1000000";
-                            default      : return "0000000";
+                            case "%A"    : return "000000000";
+                            case "(%A)"  : return "001000000";
+                            default      : return "000000000";
                         }
                     case "%A":
                         switch(mnemnonic[2]){
-                            case "%D"    : return "0000000";
-                            default      : return "0000000";
+                            case "%D"    : return "000000000";
+                            default      : return "000000000";
                         }
                     case "(%A)":
                         switch(mnemnonic[2]){
-                            case "%D"    : return "1000000";
-                            default      : return "0000000";
+                            case "%D"    : return "001000000";
+                            default      : return "000000000";
                         }
-                    default: return "0000000";
+                    default: return "000000000";
                 }
             case "addw":
                 switch(mnemnonic[1]){
                     case "$0":
                         switch(mnemnonic[2]){
-                            case "$0"    : return "0101010";
-                            case "$1"    : return "0111111";
-                            case "$-1"   : return "0111010";
-                            case "%D"    : return "0001100";
-                            case "%A"    : return "0110000";
-                            case "(%A)"  : return "1110000";
-                            default      : return "0000000";
+                            case "$0"    : return "000101010";
+                            case "$1"    : return "000111111";
+                            case "$-1"   : return "000111010";
+                            case "%D"    : return "000001100";
+                            case "%A"    : return "000110000";
+                            case "(%A)"  : return "001110000";
+                            default      : return "000000000";
                         }
                     case "$1":
                         switch(mnemnonic[2]){
-                            case "$0"    : return "0111111";
-                            case "$-1"   : return "0101010";
-                            case "%D"    : return "0011111";
-                            case "%A"    : return "0110111";
-                            case "(%A)"  : return "1110111";
-                            default      : return "0000000";
+                            case "$0"    : return "000111111";
+                            case "$-1"   : return "000101010";
+                            case "%D"    : return "000011111";
+                            case "%A"    : return "000110111";
+                            case "(%A)"  : return "001110111";
+                            default      : return "000000000";
                         }
                     case "$-1":
                         switch(mnemnonic[2]){
-                            case "$0"    : return "0111010";
-                            case "$1"    : return "0101010";
-                            case "%D"    : return "0001110";
-                            case "%A"    : return "0110010";
-                            case "(%A)"  : return "1110010";
-                            default      : return "0000000";
+                            case "$0"    : return "000111010";
+                            case "$1"    : return "000101010";
+                            case "%D"    : return "000001110";
+                            case "%A"    : return "000110010";
+                            case "(%A)"  : return "001110010";
+                            default      : return "000000000";
                         }
                     case "%D":
                         switch(mnemnonic[2]){
-                            case "$0"    : return "0001100";
-                            case "$1"    : return "0011111";
-                            case "$-1"   : return "0001110";
-                            case "%A"    : return "0000010";
-                            case "(%A)"  : return "1000010";
-                            default      : return "0000000";
+                            case "$0"    : return "000001100";
+                            case "$1"    : return "000011111";
+                            case "$-1"   : return "000001110";
+                            case "%A"    : return "000000010";
+                            case "(%A)"  : return "001000010";
+                            default      : return "000000000";
                         }
                     case "%A":
                         switch(mnemnonic[2]){
-                            case "$0"    : return "0110000";
-                            case "$1"    : return "0110111";
-                            case "$-1"   : return "0110010";
-                            case "%D"    : return "0000010";
-                            default      : return "0000000";
+                            case "$0"    : return "000110000";
+                            case "$1"    : return "000110111";
+                            case "$-1"   : return "000110010";
+                            case "%D"    : return "000000010";
+                            default      : return "000000000";
                         }
                     case "(%A)":
                         switch(mnemnonic[2]){
-                            case "$0"    : return "1110000";
-                            case "$1"    : return "1110111";
-                            case "$-1"   : return "1110010";
-                            case "%D"    : return "1000010";
-                            default      : return "0000000";
+                            case "$0"    : return "001110000";
+                            case "$1"    : return "001110111";
+                            case "$-1"   : return "001110010";
+                            case "%D"    : return "001000010";
+                            default      : return "000000000";
                         }
-                    default: return "0000000";
+                    default: return "000000000";
                 }
             case "subw":
                 switch(mnemnonic[1]){
                     case "$0":
                         switch(mnemnonic[2]){
-                            case "$0"    : return "0101010";
-                            case "$1"    : return "0111010";
-                            case "$-1"   : return "0111111";
-                            case "%D"    : return "0001111";
-                            case "%A"    : return "0110011";
-                            case "(%A)"  : return "1110011";
-                            default      : return "0000000";
+                            case "$0"    : return "000101010";
+                            case "$1"    : return "000111010";
+                            case "$-1"   : return "000111111";
+                            case "%D"    : return "000001111";
+                            case "%A"    : return "000110011";
+                            case "(%A)"  : return "001110011";
+                            default      : return "000000000";
                         }
                     case "$1":
                         switch(mnemnonic[2]){
-                            case "$0"    : return "0111111";
-                            case "$1"    : return "0101010";
-                            default      : return "0000000";
+                            case "$0"    : return "000111111";
+                            case "$1"    : return "000101010";
+                            default      : return "000000000";
                         }
                     case "$-1":
                         switch(mnemnonic[2]){
-                            case "$0"    : return "0111010";
-                            case "$-1"   : return "0101010";
-                            default      : return "0000000";
+                            case "$0"    : return "000111010";
+                            case "$-1"   : return "000101010";
+                            default      : return "000000000";
                         }
                     case "%D":
                         switch(mnemnonic[2]){
-                            case "$0"    : return "0001100";
-                            case "$1"    : return "0001110";
-                            case "$-1"   : return "0011111";
-                            case "%A"    : return "0010011";
-                            case "(%A)"  : return "1010011";
-                            default      : return "0000000";
+                            case "$0"    : return "000001100";
+                            case "$1"    : return "000001110";
+                            case "$-1"   : return "000011111";
+                            case "%A"    : return "000010011";
+                            case "(%A)"  : return "001010011";
+                            default      : return "000000000";
                         }
                     case "%A":
                         switch(mnemnonic[2]){
-                            case "$0"    : return "0110000";
-                            case "$1"    : return "0110010";
-                            case "$-1"   : return "0110111";
-                            case "%D"    : return "0000111";
-                            default      : return "0000000";
+                            case "$0"    : return "000110000";
+                            case "$1"    : return "000110010";
+                            case "$-1"   : return "000110111";
+                            case "%D"    : return "000000111";
+                            default      : return "000000000";
                         }
                     case "(%A)":
                         switch(mnemnonic[2]){
-                            case "$0"    : return "1110000";
-                            case "$1"    : return "1110010";
-                            case "$-1"   : return "1110111";
-                            case "%D"    : return "1000111";
-                            default      : return "0000000";
+                            case "$0"    : return "001110000";
+                            case "$1"    : return "001110010";
+                            case "$-1"   : return "001110111";
+                            case "%D"    : return "001000111";
+                            default      : return "000000000";
                         }
-                    default: return "0000000";
+                    default: return "000000000";
                 }
             case "rsubw":
                 switch(mnemnonic[1]){
                     case "$0":
                         switch(mnemnonic[2]){
-                            case "$0"    : return "0101010";
-                            case "$1"    : return "0111111";
-                            case "$-1"   : return "0111010";
-                            case "%D"    : return "0001100";
-                            case "%A"    : return "0110000";
-                            case "(%A)"  : return "1110000";
-                            default      : return "0000000";
+                            case "$0"    : return "000101010";
+                            case "$1"    : return "000111111";
+                            case "$-1"   : return "000111010";
+                            case "%D"    : return "000001100";
+                            case "%A"    : return "000110000";
+                            case "(%A)"  : return "001110000";
+                            default      : return "000000000";
                         }
                     case "$1":
                         switch(mnemnonic[2]){
-                            case "$0"    : return "0111010";
-                            case "$1"    : return "0101010";
-                            case "%D"    : return "0001110";
-                            case "%A"    : return "0110010";
-                            case "(%A)"  : return "1110010";
-                            default      : return "0000000";
+                            case "$0"    : return "000111010";
+                            case "$1"    : return "000101010";
+                            case "%D"    : return "000001110";
+                            case "%A"    : return "000110010";
+                            case "(%A)"  : return "001110010";
+                            default      : return "000000000";
                         }
                     case "$-1":
                         switch(mnemnonic[2]){
-                            case "$0"    : return "0111111";
-                            case "$-1"   : return "0101010";
-                            case "%D"    : return "0011111";
-                            case "%A"    : return "0110111";
-                            case "(%A)"  : return "1110111";
-                            default      : return "0000000";
+                            case "$0"    : return "000111111";
+                            case "$-1"   : return "000101010";
+                            case "%D"    : return "000011111";
+                            case "%A"    : return "000110111";
+                            case "(%A)"  : return "001110111";
+                            default      : return "000000000";
                         }
                     case "%D":
                         switch(mnemnonic[2]){
-                            case "$0"    : return "0001111";
-                            case "%A"    : return "0000111";
-                            case "(%A)"  : return "1000111";
-                            default      : return "0000000";
+                            case "$0"    : return "000001111";
+                            case "%A"    : return "000000111";
+                            case "(%A)"  : return "001000111";
+                            default      : return "000000000";
                         }
                     case "%A":
                         switch(mnemnonic[2]){
-                            case "$0"    : return "0110011";
-                            case "%D"    : return "0010011";
-                            default      : return "0000000";
+                            case "$0"    : return "000110011";
+                            case "%D"    : return "000010011";
+                            default      : return "000000000";
                         }
                     case "(%A)":
                         switch(mnemnonic[2]){
-                            case "$0"    : return "1110011";
-                            case "%D"    : return "1010011";
-                            default      : return "0000000";
+                            case "$0"    : return "001110011";
+                            case "%D"    : return "001010011";
+                            default      : return "000000000";
                         }
-                    default: return "0000000";
+                    default: return "000000000";
                 }
-            case "jmp": return "0001100";
-            case "je": return "0001100";
-            case "jne": return "0001100";
-            case "jg": return "0001100";
-            case "jge": return "0001100";
-            case "jl": return "0001100";
-            case "jle": return "0001100";
-            default: return "0000000";
+            case "jmp": return "000001100";
+            case "je": return "000001100";
+            case "jne": return "000001100";
+            case "jg": return "000001100";
+            case "jge": return "000001100";
+            case "jl": return "000001100";
+            case "jle": return "000001100";
+            default: return "000000000";
         }
     }
 
@@ -357,7 +357,20 @@ public class Code {
      */
     public static String toBinary(String symbol) {
         /* TODO: implementar */
-    	return "";
+        int dividendo = Integer.valueOf(symbol);
+        String binario = "";
+        while (dividendo > 0) {
+            if (dividendo % 2 == 1) {
+                binario = '1' + binario;
+            } else {
+                binario = '0' + binario;
+            }
+            dividendo = dividendo / 2;
+        }
+        while (16 - binario.length() > 0) {
+            binario = '0' + binario;
+        }
+    	return binario;
     }
 
 }
