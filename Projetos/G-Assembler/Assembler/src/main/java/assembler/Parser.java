@@ -89,7 +89,22 @@ public class Parser {
      */
     public CommandType commandType(String command) {
         /* TODO: implementar */
-    	return null;
+
+        int i = command.length();
+        int f = i - 1;
+
+        char c = command.charAt(f);
+        char l = command.charAt(0);
+        if (c == ':'){
+            return CommandType.L_COMMAND;
+        }
+        if (l == 'l'){
+            return CommandType.A_COMMAND;
+        }
+        if (l != 'l'){
+            return CommandType.C_COMMAND;
+        }
+    return null;
     }
 
     /**
