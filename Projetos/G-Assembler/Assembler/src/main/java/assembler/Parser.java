@@ -115,7 +115,19 @@ public class Parser {
      */
     public String symbol(String command) {
         /* TODO: implementar */
-    	return null;
+        int inicio = -1;
+        int fim = -1;
+        for (int i = 0; i < command.length(); i++) {
+            char x = command.charAt(i);
+            if (x == '$'){
+                inicio = i+1;
+            }
+            if (x == ',') {
+                fim = i;
+            }
+        }
+        String alo = command.substring(inicio, fim);
+        return alo;
     }
 
     /**
@@ -126,7 +138,17 @@ public class Parser {
      */
     public String label(String command) {
         /* TODO: implementar */
-    	return null;
+
+        int inicio = -1;
+        int fim = -1;
+        for (int i = 0; i < command.length(); i++) {
+            char x = command.charAt(i);
+            if (x == ':'){
+                fim = i;
+            }
+        }
+        String alo = command.substring(0, fim);
+        return alo;
     }
 
     /**
