@@ -159,7 +159,8 @@ public class Parser {
      */
     public String[] instruction(String command) {
         /* TODO: implementar */
-    	return null;
+        String[] lista = command.split("[\\s,]+");
+        return lista;
     }
 
 
