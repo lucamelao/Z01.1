@@ -52,14 +52,19 @@ public class Assemble {
         // END:
         Parser parser = new Parser(inputFile);
         int romAddress = 0;
-        while (parser.advance()){
+        while (parser.advance()) {
             if (parser.commandType(parser.command()) == Parser.CommandType.L_COMMAND) {
                 String label = parser.label(parser.command());
                 /* TODO: implementar */
                 // deve verificar se tal label já existe na tabela,
                 // se não, deve inserir. Caso contrário, ignorar.
+                if (!table.contains(label)) {
+                    table.addEntry(label, romAddress);
+                }
             }
-            romAddress++;
+            else{
+                romAddress++;
+            }
         }
         parser.close();
 
@@ -78,7 +83,13 @@ public class Assemble {
                     // deve verificar se tal símbolo já existe na tabela,
                     // se não, deve inserir associando um endereço de
                     // memória RAM a ele.
+                    if (!table.contains(symbol)) {
+                        table.addEntry(symbol, ramAddress);
+                    }
                 }
+            }
+            else{
+                ramAddress++;
             }
         }
         parser.close();
@@ -94,6 +105,7 @@ public class Assemble {
      */
     public void generateMachineCode() throws FileNotFoundException, IOException{
         Parser parser = new Parser(inputFile);  // abre o arquivo e aponta para o começo
+        Code code = new Code();
         String instruction  = "";
 
         /**
@@ -103,14 +115,28 @@ public class Assemble {
          * seguindo o instruction set
          */
         while (parser.advance()){
+            instruction = "";
+            String command = parser.command();
             switch (parser.commandType(parser.command())){
                 /* TODO: implementar */
                 case C_COMMAND:
-                break;
-            case A_COMMAND:
-                break;
-            default:
-                continue;
+                    instruction += "10";
+                    instruction += code.comp(parser.instruction(command));
+                    instruction += code.dest(parser.instruction(command));
+                    instruction += code.jump(parser.instruction(command));
+                    break;
+
+                case A_COMMAND:
+                    String symbol = parser.symbol(command);
+                    try{
+                        instruction = "00" + Code.toBinary(symbol);
+                    } catch (Exception e){
+                        instruction = "00" + Code.toBinary(table.getAddress(symbol).toString());
+                    }
+                    break;
+
+                default:
+                    continue;
             }
             // Escreve no arquivo .hack a instrução
             if(outHACK!=null) {
