@@ -41,6 +41,10 @@ public class Parser {
         this.lineNumber = 0;
     }
 
+    public Integer getLineNumber() {
+        return this.lineNumber;
+    }
+
     // fecha o arquivo de leitura
     public void close() throws IOException {
         fileReader.close();

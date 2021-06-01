@@ -52,17 +52,30 @@ public class Assemble {
         // END:
         Parser parser = new Parser(inputFile);
         int romAddress = 0;
+        Boolean flagJump = false;
         while (parser.advance()) {
             if (parser.commandType(parser.command()) == Parser.CommandType.L_COMMAND) {
                 String label = parser.label(parser.command());
                 /* TODO: implementar */
                 // deve verificar se tal label já existe na tabela,
                 // se não, deve inserir. Caso contrário, ignorar.
+                if (flagJump) {
+                    romAddress++;
+                }
+                flagJump = false;
                 if (!table.contains(label)) {
                     table.addEntry(label, romAddress);
                 }
             }
             else{
+                String com = parser.command();
+                if (flagJump && !com.equals("nop")) {
+                    romAddress++;
+                }
+                flagJump = false;
+                if (com.equals("jmp") || com.equals("je") || com.equals("jne") || com.equals("jg") || com.equals("jge") || com.equals("jl") || com.equals("jle")) {
+                    flagJump = true;
+                }
                 romAddress++;
             }
         }
@@ -107,6 +120,9 @@ public class Assemble {
         Parser parser = new Parser(inputFile);  // abre o arquivo e aponta para o começo
         Code code = new Code();
         String instruction  = "";
+        Boolean flagJump = false;
+        Boolean flagNop = false;
+        String linha = "";
 
         /**
          * Aqui devemos varrer o código nasm linha a linha
@@ -123,7 +139,17 @@ public class Assemble {
                     instruction += "10";
                     instruction += code.comp(parser.instruction(command));
                     instruction += code.dest(parser.instruction(command));
-                    instruction += code.jump(parser.instruction(command));
+                    String jump = code.jump(parser.instruction(command));
+                    instruction += jump;
+                    if (!instruction.equals("100000000000000000") && flagJump) {
+                        System.out.println("Está faltando 'nop' após a linha " + linha + ".");
+                        flagNop = true;
+                    }
+                    flagJump = false;
+                    if (jump != "000") {
+                        linha = String.valueOf(parser.getLineNumber());
+                        flagJump = true;
+                    }
                     break;
 
                 case A_COMMAND:
@@ -133,6 +159,11 @@ public class Assemble {
                     } catch (Exception e){
                         instruction = "00" + Code.toBinary(table.getAddress(symbol).toString());
                     }
+                    if (flagJump) {
+                        System.out.println("Está faltando 'nop' após a linha " + linha + ".");
+                        flagNop = true;
+                    }
+                    flagJump = false;
                     break;
 
                 default:
@@ -140,9 +171,17 @@ public class Assemble {
             }
             // Escreve no arquivo .hack a instrução
             if(outHACK!=null) {
+                if (flagNop) {
+                    outHACK.println("100000000000000000");
+                    flagNop = false;
+                }
                 outHACK.println(instruction);
             }
             instruction = null;
+        }
+        if (flagJump) {
+            System.out.println("Está faltando 'nop' após a linha " + linha + ".");
+            outHACK.println("100000000000000000");
         }
     }
 
