@@ -31,11 +31,11 @@ public class AssembleTest {
         SymbolTable table = assembler.fillSymbolTable();
         assertTrue("R1",table.contains("R1")==true);
         assertTrue("$impar",table.contains("impar")==true);
-        assertTrue("$impar",table.getAddress("impar")==12);
+        assertTrue("$impar",table.getAddress("impar")==15);
         assertTrue("$par",table.contains("par")==true);
         assertTrue("$par",table.getAddress("par")==2);
         assertTrue("$end",table.contains("end")==true);
-        assertTrue("$end",table.getAddress("end")==14);
+        assertTrue("$end",table.getAddress("end")==17);
     }
 
     @Test
@@ -50,13 +50,16 @@ public class AssembleTest {
         assertEquals(fileReader.readLine(),"100011100000010000"); // movw (%A), %D
         assertEquals(fileReader.readLine(),"000000000000000001"); // leaw $1, %A
         assertEquals(fileReader.readLine(),"100000000000010000"); // andw %A, %D, %D
-        assertEquals(fileReader.readLine(),"000000000000001100"); // leaw $impart, %A
+        assertEquals(fileReader.readLine(),"000000000000010001");
+        assertEquals(fileReader.readLine(),"100000011000000111");
+        assertEquals(fileReader.readLine(),"100000000000000000");
+        assertEquals(fileReader.readLine(),"000000000000001111"); // leaw $impar, %A
         assertEquals(fileReader.readLine(),"100000011000000001"); // jg
         fileReader.readLine(); // nop "100000000000000000"
         assertEquals(fileReader.readLine(),"000000000000000000"); // leaw $0, %A
         assertEquals(fileReader.readLine(),"100001111110100000"); // movw $1, ($A)
-        assertEquals(fileReader.readLine(),"000000000000001110"); // leaw $impart, %A
-        assertEquals(fileReader.readLine(),"100000011000000111"); // jg
+        assertEquals(fileReader.readLine(),"000000000000010001"); // leaw end, %A
+        assertEquals(fileReader.readLine(),"100000011000000111"); // jmp
         fileReader.readLine(); // nop "100000000000000000"
         assertEquals(fileReader.readLine(),"000000000000000000"); // leaw $0, %A
         assertEquals(fileReader.readLine(),"100001010100100000"); // movw $1, ($A)

@@ -20,6 +20,7 @@ public class Assemble {
     private PrintWriter outHACK = null;    // grava saida do código de máquina em Hack
     boolean debug;                         // flag que especifica se mensagens de debug são impressas
     private SymbolTable table;             // tabela de símbolos (variáveis e marcadores)
+    private int breakIndex;
 
     /*
      * inicializa assembler
@@ -75,10 +76,15 @@ public class Assemble {
                 flagJump = false;
                 if (com.equals("jmp") || com.equals("je") || com.equals("jne") || com.equals("jg") || com.equals("jge") || com.equals("jl") || com.equals("jle")) {
                     flagJump = true;
+                } else if (com.equals("break")) {
+                    romAddress++;
+                    romAddress++;
                 }
                 romAddress++;
             }
         }
+        table.addEntry("break", romAddress);
+        breakIndex = romAddress;
         parser.close();
 
         // a segunda passada pelo código deve buscar pelas variáveis
@@ -122,6 +128,7 @@ public class Assemble {
         String instruction  = "";
         Boolean flagJump = false;
         Boolean flagNop = false;
+        Boolean flagBreak = false;
         String linha = "";
 
         /**
@@ -131,27 +138,36 @@ public class Assemble {
          * seguindo o instruction set
          */
         while (parser.advance()){
+            flagBreak = false;
             instruction = "";
             String command = parser.command();
             switch (parser.commandType(parser.command())){
                 /* TODO: implementar */
                 case C_COMMAND:
-                    instruction += "10";
-                    instruction += code.comp(parser.instruction(command));
-                    instruction += code.dest(parser.instruction(command));
-                    String jump = code.jump(parser.instruction(command));
-                    instruction += jump;
-                    if (!instruction.equals("100000000000000000") && flagJump) {
-                        System.out.println("Está faltando 'nop' após a linha " + linha + ".");
-                        flagNop = true;
-                    }
-                    flagJump = false;
-                    if (jump != "000") {
-                        linha = String.valueOf(parser.getLineNumber());
-                        flagJump = true;
+                    if (!command.equals("break")) {
+                        instruction += "10";
+                        instruction += code.comp(parser.instruction(command));
+                        instruction += code.dest(parser.instruction(command));
+                        String jump = code.jump(parser.instruction(command));
+                        instruction += jump;
+                        if (!instruction.equals("100000000000000000") && flagJump) {
+                            System.out.println("Está faltando 'nop' após a linha " + linha + ".");
+                            flagNop = true;
+                        }
+                        flagJump = false;
+                        if (jump != "000") {
+                            linha = String.valueOf(parser.getLineNumber());
+                            flagJump = true;
+                        }
+                    } else {
+                        instruction = "00" + Code.toBinary(String.valueOf(breakIndex));
+                        System.out.println("BREAK FOI FEITO.");
+                        outHACK.println(instruction);
+                        outHACK.println("100000011000000111");
+                        outHACK.println("100000000000000000");
+                        flagBreak = true;
                     }
                     break;
-
                 case A_COMMAND:
                     String symbol = parser.symbol(command);
                     try{
@@ -170,7 +186,7 @@ public class Assemble {
                     continue;
             }
             // Escreve no arquivo .hack a instrução
-            if(outHACK!=null) {
+            if(outHACK!=null && !flagBreak) {
                 if (flagNop) {
                     outHACK.println("100000000000000000");
                     flagNop = false;
@@ -183,6 +199,7 @@ public class Assemble {
             System.out.println("Está faltando 'nop' após a linha " + linha + ".");
             outHACK.println("100000000000000000");
         }
+
     }
 
     /**

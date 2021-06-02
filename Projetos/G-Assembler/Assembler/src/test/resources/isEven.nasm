@@ -13,15 +13,16 @@ movw (%A), %D
 par:
   leaw $1, %A
   andw %A, %D, %D
+  break
   leaw $impar, %A
   jg
-  nop
+
 
   leaw $0, %A
   movw $1, (%A)
   leaw $end, %A
   jmp
-  nop
+
 impar:
   leaw $0, %A
   movw $0, (%A)
