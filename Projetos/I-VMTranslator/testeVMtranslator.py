@@ -54,7 +54,7 @@ if __name__ == "__main__":
     args = vars(ap.parse_args())
 
     pwd = os.path.dirname(os.path.abspath(__file__))
-    testDir = pwd+"/../H-VM/tests/"
+    testDir = pwd+"/../H-VM/"
     vmDir = pwd+"/../H-VM/src/"
     nasm = pwd+"/bin/nasm/"
     hack = pwd+"/bin/hack/"
