@@ -45,23 +45,38 @@ public class Code {
 
         if(command.equals("add")) {
             commands.add(String.format("; %d - ADD", lineCode++));
-            commands.add("leaw $0, %A");
+            commands.add("leaw $SP, %A");
             commands.add("movw (%A), %A");
             commands.add("decw %A");
             commands.add("movw (%A), %D");
             commands.add("decw %A");
             commands.add("addw (%A), %D, %D");
             commands.add("movw %D, (%A)");
-            //commands.add("addw $1, %A, %D");
-            //commands.add("leaw $0, %A");
-            //commands.add("movw %D, (%A)");
+            commands.add("addw $1, %A, %D");
+            commands.add("leaw $SP, %A");
+            commands.add("movw %D, (%A)");
 
         } else if (command.equals("sub")) {
             commands.add(String.format("; %d - SUB", lineCode++));
-            // IMPLEMENTAR AQUI O LAB
-            // LEMBRAR DE USAR A FUNÇÃO commands.add()!
+            commands.add("leaw $SP, %A");
+            commands.add("movw (%A), %A");
+            commands.add("decw %A");
+            commands.add("movw (%A), %D");
+            commands.add("decw %A");
+            commands.add("subw (%A), %D, %D");
+            commands.add("movw %D, (%A)");
+            commands.add("addw $1, %A, %D");
+            commands.add("leaw $SP, %A");
+            commands.add("movw %D, (%A)");
+
         } else if (command.equals("neg")) {
             commands.add(String.format("; %d - NEG", lineCode++));
+            commands.add("leaw $SP, %A");
+            commands.add("movw (%A), %A");
+            commands.add("decw %A");
+            commands.add("movw (%A), %D");
+            commands.add("negw %D");
+            commands.add("movw %D, (%A)");
 
         } else if (command.equals("eq")) {
             commands.add(String.format("; %d - EQ", lineCode++));
@@ -108,6 +123,23 @@ public class Code {
             if (segment.equals("constant")) {
                 Error.error("Não faz sentido POP com constant");
             } else if (segment.equals("local")) {
+                commands.add("leaw $" + index + ", %A");
+                commands.add("movw %A, %D");
+                commands.add("leaw $LCL, %A");
+                commands.add("addw (%A), %D, %D");
+                commands.add("leaw $R15, %A");
+                commands.add("movw %D, (%A)");
+                commands.add("leaw $SP, %A");
+                commands.add("movw (%A), %A");
+                commands.add("decw %A");
+                commands.add("movw (%A), %D");
+                commands.add("leaw $R15, %A");
+                commands.add("movw (%A), %A");
+                commands.add("movw %D, (%A)");
+                commands.add("leaw $SP, %A");
+                commands.add("movw (%A), %D");
+                commands.add("decw %D");
+                commands.add("movw %D, (%A)");
 
             } else if (segment.equals("argument")) {
 
@@ -130,6 +162,14 @@ public class Code {
             commands.add(String.format("; %d - PUSH %s %d", lineCode++ ,segment, index));
 
             if (segment.equals("constant")) {
+                commands.add("leaw $" + index + ", %A");
+                commands.add("movw %A, %D");
+                commands.add("leaw $SP, %A");
+                commands.add("movw (%A), %A");
+                commands.add("movw %D, (%A)");
+                commands.add("addw $1, %A, %D");
+                commands.add("leaw $SP, %A");
+                commands.add("movw %D, (%A)");
 
             } else if (segment.equals("local")) {
 
