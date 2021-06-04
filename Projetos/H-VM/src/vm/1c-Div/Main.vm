@@ -13,9 +13,24 @@
 // ----------------------------------
 
 function Main.main 0
+push constant 0
+pop temp 3
+label LOOP_START
+push temp 0
+push temp 1
+lt
+if-goto END
+push temp 0
+push temp 1
+sub
+pop temp 0
+push temp 3
+push constant 1
+add
+pop temp 3
+goto LOOP_START
+label END
 
-   
-label end
 
 
 // esse loop sempre deve existir!
